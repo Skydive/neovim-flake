@@ -18,37 +18,9 @@
 
       module = {
         config = {
-          # options = {
-          #   listChars = {
-          #     enable = true;
-          #     eol = "↴";
-          #     trail = "-";
-          #   };
-          # };
           colorschemes.catppuccin.enable = true;
           globals.mapleader = ",";
-          maps = {
-            normal."<leader>ff" = { action = "<cmd>Telescope find_files<cr>"; };
-            normal."<leader>fg" = { action = "<cmd>Telescope live_grep<cr>"; };
-            normal."<leader>fb" = { action = "<cmd>Telescope buffers<cr>"; };
-            normal."<leader>fh" = { action = "<cmd>Telescope help_tags<cr>"; };
-
-            normal."<leader>e" = { action = "<cmd>CHADopen<cr>"; };
-
-            normal."<leader>x" = { action = "<cmd>bdelete<cr>"; };
-            normal."<leader>h" = { action = "<cmd>BufferLineMovePrev<cr>"; };
-            normal."<leader>l" = { action = "<cmd>BufferLineMoveNext<cr>"; };
-            normal."<leader>1" = { action = "<cmd>BufferLineGoToBuffer 1<cr>"; };
-            normal."<leader>2" = { action = "<cmd>BufferLineGoToBuffer 2<cr>"; };
-            normal."<leader>3" = { action = "<cmd>BufferLineGoToBuffer 3<cr>"; };
-            normal."<leader>4" = { action = "<cmd>BufferLineGoToBuffer 4<cr>"; };
-            normal."<leader>5" = { action = "<cmd>BufferLineGoToBuffer 5<cr>"; };
-            normal."<leader>6" = { action = "<cmd>BufferLineGoToBuffer 6<cr>"; };
-            normal."<leader>7" = { action = "<cmd>BufferLineGoToBuffer 7<cr>"; };
-            normal."<leader>8" = { action = "<cmd>BufferLineGoToBuffer 8<cr>"; };
-            normal."<leader>9" = { action = "<cmd>BufferLineGoToBuffer 9<cr>"; };
-            normal."<leader>$" = { action = "<cmd>BufferLineGoToBuffer -1<cr>"; };
-          };
+          maps = import ./maps.nix;
           plugins = {
             # Greeter
             lsp = {
@@ -99,43 +71,52 @@
 
             alpha.enable = true;
       
-            cursorline.enable = true;
 
             neogit.enable = true;
             gitsigns.enable = true;
 
-            notify.enable = true;
-            lualine.enable = true;
-            
             telescope.enable = true;
             chadtree.enable = true;
 
             tmux-navigator.enable = true;
-            nvim-autopairs.enable = true;
             comment-nvim.enable = true;
             
             noice.enable = true;
+            notify.enable = true;
+            lualine.enable = true;
+            cursorline.enable = true;
 
+            nvim-autopairs.enable = true;
             treesitter.enable = true;
-            intellitab.enable = true;
+            treesitter-context.enable = true;
+            #rainbow-delimiters.enable = true;
+
+            # Typescript...
+            ts-autotag.enable = true;
+            ts-context-commentstring.enable = true;
+            #surround.enable = true;
+
+            # Sleuth > This dumb shit
+            #intellitab.enable = false;
 
             bufferline.enable = true;
 
             project-nvim.enable = true;
 
             rust-tools.enable = true;	
+
+            # Broken...
+            #tagbar.enable = true;
+
+            # Show binds
+            which-key.enable = true;
           };
           extraPlugins = with pkgs.vimPlugins; [
-            nvim-ts-autotag
             vim-sleuth
           ];
           extraConfigLua = ''
-            require('nvim-ts-autotag').setup()
           '';
-          extraConfigVim = ''
-            set number 
-            set mouse 
-          '';
+          extraConfigLuaPost = builtins.readFile ./init.lua;
         };
       };
 
