@@ -40,7 +40,8 @@
               preselect = "Item";
               sources = [
                 { name = "nvim_lsp"; }
-                #{ name = "treesitter"; }
+                { name = "treesitter"; }
+                { name = "cmdline"; }
                 { name = "path"; }
                 { name = "tmux"; }
                 { name = "buffer"; }
@@ -79,7 +80,7 @@
             chadtree.enable = true;
 
             tmux-navigator.enable = true;
-            comment-nvim.enable = true;
+            commentary.enable = true;
             
             noice.enable = true;
             notify.enable = true;

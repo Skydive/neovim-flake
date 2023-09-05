@@ -29,3 +29,9 @@ end
 require'alpha'.setup(require'alpha.themes.startify'.config)
 
 require('telescope').load_extension('projects')
+
+require('nvim-treesitter.configs').setup {
+  context_commentstring = {
+    enable = true,
+  },
+}
